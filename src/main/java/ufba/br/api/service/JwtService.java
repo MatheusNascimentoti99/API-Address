@@ -1,44 +1,52 @@
 package ufba.br.api.service;
 
-import java.time.Instant;
-import java.util.stream.Collectors;
-
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.oauth2.jwt.JwtClaimsSet;
-import org.springframework.security.oauth2.jwt.JwtEncoder;
-import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTCreationException;
+import com.auth0.jwt.exceptions.JWTVerificationException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+
+import ufba.br.api.model.User;
 
 @Service
 public class JwtService {
-  private final JwtEncoder encoder;
+  @Value("${jwt.private.key}")
+  private String secret;
 
-  public JwtService(JwtEncoder encoder) {
-    this.encoder = encoder;
-  }
+  public String generateToken(User user){
+        try{
+            Algorithm algorithm = Algorithm.HMAC256(secret);
+            String token = JWT.create()
+                    .withIssuer("auth-api")
+                    .withSubject(user.getName())
+                    .withExpiresAt(genExpirationDate())
+                    .sign(algorithm);
+            return token;
+        } catch (JWTCreationException exception) {
+            throw new RuntimeException("Error while generating token", exception);
+        }
+    }
 
-  public String generateToken(Authentication authentication) {
-    Instant now = Instant.now();
-    long expiry = 36000L;
+    public String validateToken(String token){
+        try {
+            Algorithm algorithm = Algorithm.HMAC256(secret);
+            return JWT.require(algorithm)
+                    .withIssuer("auth-api")
+                    .build()
+                    .verify(token)
+                    .getSubject();
+        } catch (JWTVerificationException exception){
+            return "";
+        }
+    }
 
-    String scope = authentication
-        .getAuthorities().stream()
-        .map(GrantedAuthority::getAuthority)
-        .collect(Collectors
-            .joining(" "));
-
-    JwtClaimsSet claims = JwtClaimsSet.builder()
-        .issuer("spring-security-jwt")
-        .issuedAt(now)
-        .expiresAt(now.plusSeconds(expiry))
-        .subject(authentication.getName())
-        .claim("scope", scope)
-        .build();
-
-    return encoder.encode(
-        JwtEncoderParameters.from(claims))
-        .getTokenValue();
-  }
+    private Instant genExpirationDate(){
+        return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
+    }
 
 }

@@ -1,11 +1,11 @@
 package ufba.br.api.repository;
-import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import ufba.br.api.model.User;
 
 public interface UserRepository extends CrudRepository<User, Long> {
-    Optional<User> findByName(String name);
+    UserDetails findByName(String name);
     
 }

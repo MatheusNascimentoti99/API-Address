@@ -47,7 +47,20 @@ public class User implements UserDetails {
     @JsonIgnore
     private List<Community> myCommunities;
 
-    private UserRole role;
+    private UserRole role = UserRole.USER;
+
+    public User(){}
+
+    public User(String name, String password) {
+        this.name = name;
+        this.password = password;
+    }
+
+    public User(String name, String password, UserRole role) {
+        this.name = name;
+        this.password = password;
+        this.role = role;
+    }
     
     public List<Community> getMyCommunities() {
         return myCommunities;
