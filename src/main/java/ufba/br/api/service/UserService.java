@@ -21,9 +21,13 @@ public class UserService {
         if (entity.role() != null) {
             newUser = new User(entity.name(), passwordEncoder.encode(entity.password()), entity.role());
         } else {
-            newUser = new User(entity.name(), entity.password());
+            newUser = new User(entity.name(), passwordEncoder.encode(entity.password()));
         }
         userRepository.save(newUser);
         return newUser;
+    }
+
+    public boolean userExists(String name) {
+        return userRepository.findByName(name) != null;
     }
 }

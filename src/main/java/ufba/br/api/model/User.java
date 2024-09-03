@@ -20,9 +20,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table
+@Getter
+@Setter
 public class User implements UserDetails {
 
     @Id
@@ -60,47 +64,6 @@ public class User implements UserDetails {
         this.name = name;
         this.password = password;
         this.role = role;
-    }
-    
-    public List<Community> getMyCommunities() {
-        return myCommunities;
-    }
-
-    public void setMyCommunities(List<Community> myCommunities) {
-        this.myCommunities = myCommunities;
-    }
-
-
-    public List<Address> getAddresses() {
-        return addresses;
-    }
-
-    public void setAddresses(List<Address> addresses) {
-        this.addresses = addresses;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     @JsonIgnore
