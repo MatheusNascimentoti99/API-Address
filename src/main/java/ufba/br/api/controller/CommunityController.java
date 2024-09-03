@@ -17,7 +17,7 @@ import ufba.br.api.exceptions.UserNotAllowedException;
 import ufba.br.api.model.Community;
 import ufba.br.api.model.User;
 import ufba.br.api.service.CommunityService;
-import ufba.br.api.service.UserDetailsServiceImpl;
+import ufba.br.api.service.AuthorizationService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -29,11 +29,11 @@ public class CommunityController {
     private CommunityService communityService;
 
     @Autowired
-    private UserDetailsServiceImpl userDetailsServiceImpl;
+    private AuthorizationService authorizationService;
 
     @PostMapping
     public ResponseEntity<Object> store(Authentication authentication, @RequestBody @Valid CommunityForm community) {
-        User user = (User) userDetailsServiceImpl.loadUserByUsername(authentication.getName());
+        User user = (User) authorizationService.loadUserByUsername(authentication.getName());
         if (!(user instanceof User)) {
             throw new UserNotAllowedException();
         }
@@ -43,7 +43,7 @@ public class CommunityController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> delete(Authentication authentication, @PathVariable("id") Long id) {
-        User user = (User) userDetailsServiceImpl.loadUserByUsername(authentication.getName());
+        User user = (User) authorizationService.loadUserByUsername(authentication.getName());
         if (!(user instanceof User)) {
             throw new UserNotAllowedException();
         }
@@ -53,7 +53,7 @@ public class CommunityController {
 
     @GetMapping("/my")
     public ResponseEntity<List<Community>> indexMy(Authentication authentication) {
-        User user = (User) userDetailsServiceImpl.loadUserByUsername(authentication.getName());
+        User user = (User) authorizationService.loadUserByUsername(authentication.getName());
         if (!(user instanceof User)) {
             throw new UserNotAllowedException();
         }

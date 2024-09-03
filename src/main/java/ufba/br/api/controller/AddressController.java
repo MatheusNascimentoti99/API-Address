@@ -12,7 +12,7 @@ import ufba.br.api.model.User;
 import ufba.br.api.repository.UserRepository;
 import ufba.br.api.service.AddressService;
 import ufba.br.api.service.CommunityService;
-import ufba.br.api.service.UserDetailsServiceImpl;
+import ufba.br.api.service.AuthorizationService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,14 +41,14 @@ public class AddressController {
     private CommunityService communityService;
 
     @Autowired
-    private UserDetailsServiceImpl userDetailsServiceImpl;
+    private AuthorizationService authorizationService;
 
     @GetMapping
     public ResponseEntity<PaginationResponse<Address>> index(Authentication authentication,
             @RequestParam(value = "page", defaultValue = "0", required = false) int page,
             @RequestParam(value = "size", defaultValue = "5", required = false) int size) {
 
-        User user = (User) userDetailsServiceImpl.loadUserByUsername(authentication.getName());
+        User user = (User) authorizationService.loadUserByUsername(authentication.getName());
         if (!(user instanceof User)) {
             throw new UserNotAllowedException();
         }
@@ -57,7 +57,7 @@ public class AddressController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Address> show(Authentication authentication, @PathVariable("id") Long id) {
-        User user = (User) userDetailsServiceImpl.loadUserByUsername(authentication.getName());
+        User user = (User) authorizationService.loadUserByUsername(authentication.getName());
         if (!(user instanceof User)) {
             throw new UserNotAllowedException();
         }
@@ -71,7 +71,7 @@ public class AddressController {
     @PostMapping
     public ResponseEntity<Object> store(Authentication authentication, @RequestBody @Valid AddressForm entity) {
         // get current logged user
-        User user = (User) userDetailsServiceImpl.loadUserByUsername(authentication.getName());
+        User user = (User) authorizationService.loadUserByUsername(authentication.getName());
         if (!(user instanceof User)) {
             throw new UserNotAllowedException();
         }
@@ -96,7 +96,7 @@ public class AddressController {
 
     @PutMapping("/{id}")
     public Address update(Authentication authentication, @PathVariable("id") Long id, @RequestBody @Valid AddressForm entity) {
-        User user = (User) userDetailsServiceImpl.loadUserByUsername(authentication.getName());
+        User user = (User) authorizationService.loadUserByUsername(authentication.getName());
         if (!(user instanceof User)) {
             throw new UserNotAllowedException();
         }
@@ -120,7 +120,7 @@ public class AddressController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> delete(Authentication authentication, @PathVariable("id") Long id) {
-        User user = (User) userDetailsServiceImpl.loadUserByUsername(authentication.getName());
+        User user = (User) authorizationService.loadUserByUsername(authentication.getName());
         if (!(user instanceof User)) {
             throw new UserNotAllowedException();
         }

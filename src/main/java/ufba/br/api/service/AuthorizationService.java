@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import ufba.br.api.repository.UserRepository;
 
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class AuthorizationService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
