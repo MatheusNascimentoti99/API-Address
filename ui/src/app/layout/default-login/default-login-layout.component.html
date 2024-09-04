@@ -1,5 +1,5 @@
 <main>
-  <section class="form-section">
+  <form class="form-section" (submit)="onSubmit()">
     <img src="/assets/svg/logo.svg"/>
     <ng-content></ng-content>
     <div class="btn-wrapper">
@@ -7,14 +7,14 @@
           <mat-progress-bar mode="indeterminate"></mat-progress-bar>
         }
         <button mat-flat-button color="primary" class="w-100"
-          (click)="submit()"
           [disabled]="isLoading"
+          type="submit"
         >
           {{ primaryBtnText }}</button>
         <span>ou</span>
         <button mat-button color="tertiary" class="w-100" (click)="navigate()" [disabled]="isLoading">{{ secondaryBtnText }}</button>
     </div>
-  </section>
+  </form>
   <section class="main-section" [style]="!showSVG ? 'display: none' : ''">
     <h1>Addrex, seu endereço aqui!</h1>
     <img src="/assets/svg/main-illustration.svg" height="50%"/>

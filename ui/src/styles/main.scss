@@ -1,23 +1,43 @@
 @use '@angular/material' as mat;
-@use './m3-theme.scss';
 // mat.$theme-ignore-duplication-warnings: true;
 
 @include mat.core();
 // Define a dark theme
-$dark-theme: m3-theme.$dark-theme;
+$dark-theme:  mat.define-theme((
+  color: (
+    theme-type: dark,
+    primary: mat.$cyan-palette,
+  ),
+  typography: (
+    brand-family: 'Inter sans-serif',
+    plain-family: 'Inter sans-serif'
+  ),
+  density: (
+    scale: 0,
+  )
+));
 
 // Define a light theme
-$light-theme: m3-theme.$light-theme;
+$light-theme:  mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$blue-palette,
+  ),
+  typography: (
+    brand-family: 'Inter sans-serif',
+    plain-family: 'Inter sans-serif'
+  ),
+  density: (
+    scale: 0,
+  )
+));
 
-html {
+:root {
   @include mat.all-component-themes($dark-theme);
-
-  // Apply the dark theme by default
   @media (prefers-color-scheme: light) {
    @include mat.all-component-colors($light-theme);
   }
 }
-
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Inter, sans-serif; }

@@ -22,7 +22,7 @@ export class DefaultLoginLayoutComponent {
   @Input() disablePrimaryBtn: boolean = true;
   @Input() isLoading: boolean = false;
   @Output() isLoadingChange = new EventEmitter<number>();
-  @Output("submit") onSubmit = new EventEmitter();
+  @Output("submit") submit = new EventEmitter();
 
   @Output("navigate") onNavigate = new EventEmitter();
 
@@ -41,8 +41,9 @@ export class DefaultLoginLayoutComponent {
     });
   }
 
-  submit(){
-    this.onSubmit.emit();
+  onSubmit(){
+    this.submit.emit();
+    return false;
   }
 
   navigate(){
