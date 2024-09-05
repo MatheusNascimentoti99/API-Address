@@ -7,9 +7,9 @@
       <img src="/assets/svg/logo.svg" height="40px"/>
     </mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="home">Início</a>
-      <a mat-list-item href="community">Top comunidades</a>
-      <a mat-list-item href="address/new">Novo endereço</a>
+      <a mat-list-item routerLink="home">Início</a>
+      <a mat-list-item routerLink="community">Top comunidades</a>
+      <a mat-list-item routerLink="address/new">Novo endereço</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -24,7 +24,7 @@
         </button>
       }
       <span class="spacer"></span>
-      <span class="mat-body-small">
+      <span class="mat-body-small name-user">
         Olá, {{ user.name }}
         @if(user.role) {
           ({{ user.role }})

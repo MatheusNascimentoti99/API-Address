@@ -7,7 +7,7 @@
   (submit)="submit()"
 >
 
-<form class="form">
+<div class="form">
     <mat-form-field class="w-100">
         <mat-label>Usuário</mat-label>
         <input matInput placeholder="Username" name="username" [(ngModel)]="loginObject.username"
@@ -23,7 +23,7 @@
         <input matInput type="password" placeholder="Password" name="passwordConfirm"
             [(ngModel)]="loginObject.passwordConfirm" required minlength="8">
     </mat-form-field>
-</form>
+</div>
 
 </app-default-login-layout>
 

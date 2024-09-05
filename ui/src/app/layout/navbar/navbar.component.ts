@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { AuthService } from '@app/services/auth.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -22,6 +23,7 @@ import { AuthService } from '@app/services/auth.service';
     MatListModule,
     MatIconModule,
     AsyncPipe,
+    RouterLink
   ]
 })
 export class NavbarComponent {

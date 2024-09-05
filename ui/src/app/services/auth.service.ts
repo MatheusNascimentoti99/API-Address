@@ -25,6 +25,12 @@ export class AuthService {
     }))
   }
 
+  me() {
+    return this.httpClient.get<User>('api/me').pipe(tap(response => {
+      localStorage.setItem('user', JSON.stringify(response))
+    }))
+  }
+
   register(name: string, password: string) {
     return this.httpClient.post('api/register', { name, password });
   }

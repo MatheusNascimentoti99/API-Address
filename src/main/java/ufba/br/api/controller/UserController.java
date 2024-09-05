@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private AuthorizationService authorizationService;
 
     @PostMapping("register")
     public ResponseEntity<Object> register(@RequestBody @Valid UserForm user) {
@@ -35,4 +37,13 @@ public class UserController {
         response.put("id", newUser.getId());
         return ResponseEntity.ok(response);
     }
+
+
+    @GetMapping("me")
+    public ResponseEntity<User> verifyUser(Authentication authentication) {
+        User user = (User) authorizationService.loadUserByUsername(authentication.getName());
+        return ResponseEntity.ok(user);
+    }
+    
+    
 }
