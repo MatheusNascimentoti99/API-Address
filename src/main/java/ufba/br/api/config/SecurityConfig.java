@@ -36,7 +36,7 @@ public class SecurityConfig {
                 .requestMatchers("/auth").permitAll()
                 .requestMatchers("/error").permitAll()
                 .requestMatchers("/register").permitAll()
-                .requestMatchers(HttpMethod.POST, "community/**").hasRole(UserRole.ADMIN.name())
+                .requestMatchers(HttpMethod.POST, "community/**").hasAnyRole(UserRole.ADMIN.name(), UserRole.USER.name())
                 .requestMatchers(HttpMethod.PUT, "community/**").hasRole(UserRole.ADMIN.name())
                 .requestMatchers(HttpMethod.DELETE, "community/**").hasRole(UserRole.ADMIN.name())
                 .requestMatchers(HttpMethod.PATCH, "community/**").hasRole(UserRole.ADMIN.name())

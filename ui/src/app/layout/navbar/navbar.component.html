@@ -7,8 +7,9 @@
       <img src="/assets/svg/logo.svg" height="40px"/>
     </mat-toolbar>
     <mat-nav-list>
+      <a mat-list-item routerLink="dashboard" *ngIf="isAdmin">Dashboard</a>
       <a mat-list-item routerLink="home">Início</a>
-      <a mat-list-item routerLink="community">Top comunidades</a>
+      <a mat-list-item routerLink="top-community">Top comunidades</a>
       <a mat-list-item routerLink="address/new">Novo endereço</a>
     </mat-nav-list>
   </mat-sidenav>

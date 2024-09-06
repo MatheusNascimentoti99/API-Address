@@ -56,8 +56,6 @@ export class CreateComponent {
     confirm.afterClosed().subscribe(result => {
       if (result) {
         this.create();
-      } else {
-        this.goHome();
       }
     });
   }

@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgIf } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -23,6 +23,7 @@ import { RouterLink } from '@angular/router';
     MatListModule,
     MatIconModule,
     AsyncPipe,
+    NgIf,
     RouterLink
   ]
 })
@@ -38,6 +39,10 @@ export class NavbarComponent {
 
   get user() {
     return this.authService.getUser()
+  }
+
+  get isAdmin() {
+    return this.authService.getUser().role == 'ADMIN'
   }
   logout() {
     this.authService.logout();
