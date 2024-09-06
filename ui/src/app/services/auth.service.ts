@@ -31,8 +31,8 @@ export class AuthService {
     }))
   }
 
-  register(name: string, password: string) {
-    return this.httpClient.post('api/register', { name, password });
+  register(name: string, password: string, role: string | null = null) {
+    return this.httpClient.post('api/register', { name, password, role });
   }
 
   logout() {

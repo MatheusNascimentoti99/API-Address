@@ -9,7 +9,6 @@ import ufba.br.api.exceptions.AddresNotFoundException;
 import ufba.br.api.exceptions.UserNotAllowedException;
 import ufba.br.api.model.Address;
 import ufba.br.api.model.User;
-import ufba.br.api.repository.UserRepository;
 import ufba.br.api.service.AddressService;
 import ufba.br.api.service.CommunityService;
 import ufba.br.api.service.AuthorizationService;

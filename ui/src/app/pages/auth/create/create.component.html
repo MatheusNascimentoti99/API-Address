@@ -23,6 +23,13 @@
         <input matInput type="password" placeholder="Password" name="passwordConfirm"
             [(ngModel)]="loginObject.passwordConfirm" required minlength="8">
     </mat-form-field>
+    <mat-form-field class="w-100">
+      <mat-label>Função</mat-label>
+      <mat-select matNativeControl [(ngModel)]="loginObject.role" name="Função">
+          <mat-option value="ADMIN">Admin</mat-option>
+          <mat-option value="USER">User</mat-option>
+      </mat-select>
+    </mat-form-field>
 </div>
 
 </app-default-login-layout>
