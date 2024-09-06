@@ -10,7 +10,6 @@ import ufba.br.api.exceptions.UserNotAllowedException;
 import ufba.br.api.model.Community;
 import ufba.br.api.model.User;
 import ufba.br.api.repository.CommunityRepository;
-import ufba.br.api.repository.CommunityRepositoryCustomImpl;
 
 @Service
 public class CommunityService {
@@ -50,5 +49,17 @@ public class CommunityService {
 
     public List<Community> getTop3Communities() {
         return communityRepositiory.findMostPopularCommunities();
+    }
+
+    public Long countCommunitiesWithUsers() {
+        return communityRepositiory.countUsersWithCommunity();
+    }
+
+    public Long countCommunities() {
+        return communityRepositiory.count();
+    }
+
+    public Long avgAddressByCommunity() {
+        return communityRepositiory.avgAddressByCommunity();
     }
 }
