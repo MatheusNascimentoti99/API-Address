@@ -5,9 +5,9 @@ import { MatSortModule, MatSort } from '@angular/material/sort';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { NgFor } from '@angular/common';
-import { Community } from '@app/interface/Address';
 import { CommunityService } from '@app/services/community.service';
 import { NavigationStart, Router } from '@angular/router';
+import { Community } from '@app/interface/Community';
 
 @Component({
   selector: 'app-top-communities',

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Community } from '@app/interface/Address';
+import { Community, CommunityForm } from '@app/interface/Community';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,10 @@ import { Community } from '@app/interface/Address';
 export class CommunityService {
 
   constructor(private httpClient: HttpClient) {
-    
+  }
+
+  create(community: CommunityForm) {
+    return this.httpClient.post('api/community', community);
   }
 
   findAll() {

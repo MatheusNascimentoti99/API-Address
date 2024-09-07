@@ -1,9 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
-import { AuthService } from '@app/services/auth.service';
 import { Pagination } from '@app/interface/Pagination';
-import { Address, Community } from '@app/interface/Address';
+import { Address, } from '@app/interface/Address';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { PageEvent, MatPaginatorModule } from '@angular/material/paginator';
@@ -12,7 +11,6 @@ import { catchError, throwError } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AddressService } from '@app/services/address.service';
-import { CommunityService } from '@app/services/community.service';
 import { MatCardModule } from '@angular/material/card';
 @Component({
   selector: 'app-home',
@@ -39,7 +37,6 @@ export class HomeComponent {
     totalElements: 0,
     totalPages: 0
   };
-  mostPopularCommunities: Community[] = [];
   constructor(private addressService: AddressService,
     private router: Router,
     private _snackBar: MatSnackBar,

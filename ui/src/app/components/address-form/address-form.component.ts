@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, model, Output } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -11,10 +11,15 @@ import { Router } from '@angular/router';
 import { MatSelectModule } from '@angular/material/select';
 import { BrasilAPIService } from '@app/services/brasil-api.service';
 import { City, State } from '@app/interface/BrasilAPI';
-import { Community } from '@app/interface/Address';
 import { CommunityService } from '@app/services/community.service';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { MatCardModule } from '@angular/material/card';
+import { Community, CommunityForm } from '@app/interface/Community';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { NewCommunityDialogComponent } from '../new-community-dialog/new-community-dialog.component';
+import { AuthService } from '@app/services/auth.service';
+import { NgIf } from '@angular/common';
 @Component({
   selector: 'app-address-form',
   standalone: true,
@@ -28,6 +33,7 @@ import { MatCardModule } from '@angular/material/card';
     ReactiveFormsModule,
     NgxMaskDirective,
     MatCardModule,
+    NgIf
   ],
   templateUrl: './address-form.component.html',
   styleUrl: './address-form.component.scss',
@@ -38,10 +44,12 @@ import { MatCardModule } from '@angular/material/card';
 export class AddressFormComponent {
 
   constructor(
-    private httpClient: HttpClient,
     private router: Router,
     private brasilApi: BrasilAPIService,
-    private communityService: CommunityService
+    private communityService: CommunityService,
+    private _snackBar: MatSnackBar,
+    private dialog: MatDialog,
+    public authService: AuthService
   ) { }
   states: State[] = [];
   cities: City[] = [];
@@ -75,7 +83,32 @@ export class AddressFormComponent {
     this.communityService.findAll().subscribe(communities => {
       this.communities = communities;
     });
+  }
 
+  readonly name = model('');
+  readonly description = model('');
+  onClickNewCommunity() {
+    const confirm = this.dialog.open(NewCommunityDialogComponent, {
+      data: {
+        name: this.name(),
+        description: this.description()
+      },
+    });
+    confirm.afterClosed().subscribe(result => {
+      if (result) {
+        this.createCommunity(result);
+      }
+    });
+  }
+
+  createCommunity(result: CommunityForm) {
+    this.communityService.create({
+      name: result.name,
+      description: result.description
+    }).subscribe(() => {
+      this._snackBar.open('Comunidade criada com sucesso', 'Fechar')
+      this.findCommunities()
+    })
   }
 
   ngOnInit() {

@@ -71,7 +71,7 @@
                 }
               </mat-select>
             </mat-form-field>
-          <button mat-icon-button>
+          <button mat-icon-button (click)="onClickNewCommunity()" type="button" *ngIf="authService.isAdmin()">
             <mat-icon>add</mat-icon>
           </button>
         </div>

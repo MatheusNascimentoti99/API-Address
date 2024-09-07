@@ -1,4 +1,4 @@
-import { User } from "@app/interface/User";
+import { Community } from "./Community";
 
 export interface Address {
     id: number;
@@ -12,12 +12,4 @@ export interface Address {
     complement: string;
     number: number;
     communities: Community[];
-}
-
-export interface Community {
-    id: number;
-    name: string;
-    createdAt: Date;
-    updatedAt: Date;
-    owner: User;
 }

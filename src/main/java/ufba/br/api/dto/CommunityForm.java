@@ -1,5 +1,7 @@
 package ufba.br.api.dto;
 
+import jakarta.validation.constraints.NotEmpty;
+
 public record CommunityForm(
-    String name,
-    String description) {}
+    @NotEmpty String name,
+    @NotEmpty String description) {}
