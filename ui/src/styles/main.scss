@@ -21,7 +21,7 @@ $dark-theme:  mat.define-theme((
 $light-theme:  mat.define-theme((
   color: (
     theme-type: light,
-    primary: mat.$blue-palette,
+    primary: mat.$cyan-palette,
   ),
   typography: (
     brand-family: 'Inter sans-serif',
@@ -34,9 +34,14 @@ $light-theme:  mat.define-theme((
 
 :root {
   @include mat.all-component-themes($dark-theme);
+  
   @media (prefers-color-scheme: light) {
-   @include mat.all-component-colors($light-theme);
+    @include mat.all-component-colors($light-theme);
   }
+}
+
+.secondary-button {
+  @include mat.button-color($dark-theme, $color-variant: secondary);
 }
 
 html, body { height: 100%; }
