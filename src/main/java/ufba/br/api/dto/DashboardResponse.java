@@ -8,5 +8,5 @@ import lombok.Getter;
 public class DashboardResponse {
     private long countUsersWithCommunity;
     private long countCommunities;
-    private long avgAddressByCommunity;
+    private float avgAddressByCommunity;
 }

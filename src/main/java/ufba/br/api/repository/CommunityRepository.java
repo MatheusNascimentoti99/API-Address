@@ -17,7 +17,7 @@ public interface CommunityRepository extends ListCrudRepository<Community, Long>
     Long countUsersWithCommunity();
 
     @Query("SELECT AVG(result.value) AS value FROM (SELECT COUNT(a.id) AS value FROM Community c JOIN c.addresses a GROUP BY c.id) AS result")
-    Long avgAddressByCommunity();
+    float avgAddressByCommunity();
 
     @Query("SELECT count(a.id) FROM Address a JOIN a.communities c WHERE c.id = :id")
     Long countAddressesInCommunity(@Param("id") Long id);

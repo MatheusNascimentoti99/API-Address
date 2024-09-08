@@ -60,7 +60,7 @@ public class CommunityService {
         return communityRepositiory.count();
     }
 
-    public Long avgAddressByCommunity() {
+    public float avgAddressByCommunity() {
         return communityRepositiory.avgAddressByCommunity();
     }
 

@@ -81,7 +81,7 @@ public class CommunityController {
     public ResponseEntity<DashboardResponse> dashBoard() {
         long countCommunitiesWithUsers = communityService.countCommunitiesWithUsers();
         long countCommunities = communityService.countCommunities();
-        long avgAddressByCommunity = communityService.avgAddressByCommunity();
+        float avgAddressByCommunity = communityService.avgAddressByCommunity();
         DashboardResponse dashboardResponse = new DashboardResponse(countCommunitiesWithUsers, countCommunities, avgAddressByCommunity);
         return ResponseEntity.ok(dashboardResponse);
     }
