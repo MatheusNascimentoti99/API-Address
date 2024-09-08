@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ufba.br.api.dto.CommunityForm;
+import ufba.br.api.exceptions.CommunityNotFoundException;
 import ufba.br.api.exceptions.UserNotAllowedException;
 import ufba.br.api.model.Community;
 import ufba.br.api.model.User;
@@ -61,5 +62,12 @@ public class CommunityService {
 
     public Long avgAddressByCommunity() {
         return communityRepositiory.avgAddressByCommunity();
+    }
+
+    public Long countAddressesInCommunity(Long communityId) {
+        if (!communityRepositiory.existsById(communityId)) {
+            throw new CommunityNotFoundException();
+        }
+        return communityRepositiory.countAddressesInCommunity(communityId);
     }
 }

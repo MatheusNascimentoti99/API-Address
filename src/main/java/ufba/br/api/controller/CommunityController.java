@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
+import ufba.br.api.dto.CommunityAnalitycForm;
 import ufba.br.api.dto.CommunityForm;
 import ufba.br.api.dto.DashboardResponse;
 import ufba.br.api.exceptions.UserNotAllowedException;
@@ -21,6 +22,8 @@ import ufba.br.api.service.CommunityService;
 import ufba.br.api.service.AuthorizationService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/community")
@@ -74,7 +77,7 @@ public class CommunityController {
         return ResponseEntity.ok(communities);
     }
 
-    @GetMapping("/count-users")
+    @GetMapping("/dashboard")
     public ResponseEntity<DashboardResponse> dashBoard() {
         long countCommunitiesWithUsers = communityService.countCommunitiesWithUsers();
         long countCommunities = communityService.countCommunities();
@@ -82,5 +85,13 @@ public class CommunityController {
         DashboardResponse dashboardResponse = new DashboardResponse(countCommunitiesWithUsers, countCommunities, avgAddressByCommunity);
         return ResponseEntity.ok(dashboardResponse);
     }
+
+    @GetMapping("/{id}/analitycs")
+    public ResponseEntity<CommunityAnalitycForm> countAddressesInCommunity(@PathVariable("id") Long id) {
+        CommunityAnalitycForm response = new CommunityAnalitycForm();
+        response.setCountAddress(communityService.countAddressesInCommunity(id));
+        return ResponseEntity.ok(response);
+    }
+    
     
 }
