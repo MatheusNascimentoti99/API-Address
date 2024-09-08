@@ -1,10 +1,15 @@
 .row {
     display: flex;
     flex-direction: row;
-    overflow: auto;
-  }
-  
-.col {
-flex: 1;
-margin-right: 20px;
+    gap: 8px;
+    margin: 4px;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.actions {
+  display: flex;
+  justify-items: flex-end;
 }

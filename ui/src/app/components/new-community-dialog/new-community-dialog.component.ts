@@ -1,10 +1,10 @@
-import { Component, Inject, inject, model } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
+import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { CommunityForm } from '@app/interface/Community';
 
 export interface DialogData {
   description: string;
@@ -29,8 +29,9 @@ export interface DialogData {
   styleUrl: './new-community-dialog.component.scss'
 })
 export class NewCommunityDialogComponent {
-  readonly dialogRef = inject(MatDialogRef<NewCommunityDialogComponent>);
-  readonly data = inject<DialogData>(MAT_DIALOG_DATA);
+  private _bottomSheetRef =
+    inject<MatBottomSheetRef<NewCommunityDialogComponent>>(MatBottomSheetRef);
+  readonly data = inject(MAT_BOTTOM_SHEET_DATA);
 
   communityForm: FormGroup;
 
@@ -44,11 +45,11 @@ export class NewCommunityDialogComponent {
   onSave(): void {
     if (this.communityForm.valid) {
       // Handle form save logic here
-      this.dialogRef.close(this.communityForm.value);
+      this._bottomSheetRef.dismiss(this.communityForm.value);
     }
   }
 
   onNoClick(): void {
-    this.dialogRef.close();
+    this._bottomSheetRef.dismiss();
   }
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, model, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, model, Output } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -6,7 +6,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { AddressForm } from '@app/interface/AddressForm';
 import { AddressViaCEP } from '@app/interface/AddressViaCEP';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { MatSelectModule } from '@angular/material/select';
 import { BrasilAPIService } from '@app/services/brasil-api.service';
@@ -17,6 +16,7 @@ import { MatCardModule } from '@angular/material/card';
 import { Community, CommunityForm } from '@app/interface/Community';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { NewCommunityDialogComponent } from '../new-community-dialog/new-community-dialog.component';
 import { AuthService } from '@app/services/auth.service';
 import { NgIf } from '@angular/common';
@@ -51,6 +51,7 @@ export class AddressFormComponent {
     private dialog: MatDialog,
     public authService: AuthService
   ) { }
+  readonly bottomSheet = inject(MatBottomSheet);
   states: State[] = [];
   cities: City[] = [];
   selectedState!: State;
@@ -88,13 +89,13 @@ export class AddressFormComponent {
   readonly name = model('');
   readonly description = model('');
   onClickNewCommunity() {
-    const confirm = this.dialog.open(NewCommunityDialogComponent, {
+    const confirm = this.bottomSheet.open(NewCommunityDialogComponent, {
       data: {
         name: this.name(),
         description: this.description()
       },
     });
-    confirm.afterClosed().subscribe(result => {
+    confirm.afterDismissed().subscribe(result => {
       if (result) {
         this.createCommunity(result);
       }
