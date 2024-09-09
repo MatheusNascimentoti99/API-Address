@@ -37,11 +37,27 @@
           </mat-card-content>
         </mat-card>
       </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="2">
+        <mat-card appearance="outlined" class="dashboard-card w-100">
+          <mat-card-header>
+            <mat-card-title class="dashboard-card-title">
+              Top 3 comunidades
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div>
+              @for (community of topCommunities; track community) {
+                <div>{{community.name}}</div>
+              }
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
       <mat-grid-tile [colspan]="cols" [rowspan]="2">
         <mat-card appearance="outlined" class="dashboard-card w-100">
           <mat-card-header>
             <mat-card-title class="dashboard-card-title">
-              Endereços por communidade
+              Endereços por comunidade
             </mat-card-title>
           </mat-card-header>
           <mat-card-content class="dashboard-card-content">

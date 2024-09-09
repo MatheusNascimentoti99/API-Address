@@ -20,6 +20,7 @@ import {
   ApexChart
 } from "ng-apexcharts";
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { MatListModule } from '@angular/material/list';
 
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
@@ -42,13 +43,15 @@ export type ChartOptions = {
     MatSelectModule,
     MatInputModule,
     MatFormFieldModule,
-    NgApexchartsModule
+    NgApexchartsModule,
+    MatListModule
   ]
 })
 export class DashboardComponent {
   private communityService = inject(CommunityService);
   dashboardData: Dashboard | null = null;
   communities: Community[] = [];
+  topCommunities: Community[] = [];
   countAddressesInCommunity$: Observable<number> | undefined;
   destroyed = new Subject<void>();
   cols = 3;
@@ -68,6 +71,9 @@ export class DashboardComponent {
       this.chartOptions.labels = this.dashboardData?.communityCountGroup.map(value => `${value.name}(${value.id})`) ?? []
     });
     this.findCommunities();
+    this.communityService.findMostPopular().subscribe(value => {
+      this.topCommunities = value;
+    });
 
     inject(BreakpointObserver)
       .observe([
