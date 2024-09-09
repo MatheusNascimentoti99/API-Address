@@ -2,10 +2,19 @@
   margin: 20px;
 }
 
+.w-100 {
+  width: 100%;
+}
+
 .dashboard-card-content {
   text-align: center;
 }
 
 .dashboard-card-title {
   text-align: center;
+}
+
+.filter-community {
+  display: flex;
+  justify-content: flex-end;
 }

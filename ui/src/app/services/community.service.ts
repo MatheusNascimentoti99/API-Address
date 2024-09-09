@@ -25,4 +25,8 @@ export class CommunityService {
   findDashboard() {
     return this.httpClient.get<Dashboard>('api/community/dashboard');
   }
+
+  countAddressesInCommunity(idCommunity: number) {
+    return this.httpClient.get<{countAddress: number}>(`api/community/${idCommunity}/analitycs`)
+  }
 }

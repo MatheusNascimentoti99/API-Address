@@ -1,8 +1,8 @@
 <div class="grid-container">
-  <h1 class="mat-h1">Dashboard</h1>
+  <h3>Dashboard</h3>
   <mat-grid-list cols="2" rowHeight="100px">
       <mat-grid-tile [colspan]="1" [rowspan]="1">
-        <mat-card class="dashboard-card mat-elevation-z8">
+        <mat-card class="dashboard-card mat-elevation-z8 w-100">
           <mat-card-header>
             <mat-card-title class="dashboard-card-title">
               Comunidades
@@ -14,10 +14,10 @@
         </mat-card>
       </mat-grid-tile>
       <mat-grid-tile [colspan]="1" [rowspan]="1">
-        <mat-card class="dashboard-card mat-elevation-z8">
+        <mat-card class="dashboard-card mat-elevation-z8 w-100">
           <mat-card-header>
             <mat-card-title class="dashboard-card-title">
-              Média de endereços por comunidade
+              Média endereços por comunidade
             </mat-card-title>
           </mat-card-header>
           <mat-card-content class="dashboard-card-content">
@@ -26,7 +26,7 @@
         </mat-card>
       </mat-grid-tile>
       <mat-grid-tile [colspan]="1" [rowspan]="1">
-        <mat-card class="dashboard-card mat-elevation-z8">
+        <mat-card class="dashboard-card mat-elevation-z8 w-100">
           <mat-card-header>
             <mat-card-title class="dashboard-card-title">
               Usuários com comunidade
@@ -37,6 +37,31 @@
           </mat-card-content>
         </mat-card>
       </mat-grid-tile>
-      
+      <mat-grid-tile [colspan]="2" [rowspan]="1">
+        <div class="w-100 filter-community">
+          <mat-form-field>
+            <mat-label>Filtrar comunidade</mat-label>
+            <mat-select matNativeControl (selectionChange)="selectionChange($event)" name="community">
+                @for (community of communities; track community) {
+                    <mat-option [value]="community.id">{{community.name}}</mat-option>
+                }
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </mat-grid-tile>
+      @if (countAddressesInCommunity$ != undefined) {
+        <mat-grid-tile [colspan]="2" [rowspan]="1">
+          <mat-card class="dashboard-card mat-elevation-z8 w-100">
+            <mat-card-header>
+              <mat-card-title class="dashboard-card-title w-100">
+                Endereços em comunidade
+              </mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="dashboard-card-content">
+              <div class="mat-title-large">{{ countAddressesInCommunity$ | async }}</div>
+            </mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+      }
   </mat-grid-list>
 </div>

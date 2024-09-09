@@ -8,7 +8,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { CommunityService } from '@app/services/community.service';
-import { Dashboard } from '@app/interface/Community';
+import { Community, Dashboard } from '@app/interface/Community';
+import { MatSelectChange, MatSelectModule } from '@angular/material/select';
+import { Observable } from 'rxjs';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,36 +25,33 @@ import { Dashboard } from '@app/interface/Community';
     MatMenuModule,
     MatIconModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    MatSelectModule,
+    MatInputModule,
+    MatFormFieldModule,
   ]
 })
 export class DashboardComponent {
-  private breakpointObserver = inject(BreakpointObserver);
   private communityService = inject(CommunityService);
   dashboardData: Dashboard | null = null;
-  
+  communities: Community[] = [];
+  countAddressesInCommunity$: Observable<number> | undefined;
   constructor() {
     this.communityService.findDashboard().subscribe(value => {
-      this.dashboardData = value
-    })
+      this.dashboardData = value;
+    });
+    this.findCommunities();
   }
-  cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
-    map(({ matches }) => {
-      if (matches) {
-        return [
-          { title: 'Card 1', cols: 1, rows: 1 },
-          { title: 'Card 2', cols: 1, rows: 1 },
-          { title: 'Card 3', cols: 1, rows: 1 },
-          { title: 'Card 4', cols: 1, rows: 1 }
-        ];
-      }
 
-      return [
-        { title: 'Card 1', cols: 2, rows: 1 },
-        { title: 'Card 2', cols: 1, rows: 1 },
-        { title: 'Card 3', cols: 1, rows: 2 },
-        { title: 'Card 4', cols: 1, rows: 1 }
-      ];
-    })
-  );
+  selectionChange(event: MatSelectChange) {
+    this.countAddressesInCommunity$ = this.communityService.countAddressesInCommunity(event.value).pipe(map(value => {
+      return value.countAddress
+    }))
+  }
+
+  findCommunities() {
+    this.communityService.findAll().subscribe(communities => {
+      this.communities = communities;
+    });
+  }
 }
