@@ -1,8 +1,8 @@
 <div class="grid-container">
-  <h3>Dashboard</h3>
+  <h3>Dashboard Comunidade</h3>
   <mat-grid-list cols="2" rowHeight="100px">
       <mat-grid-tile [colspan]="1" [rowspan]="1">
-        <mat-card class="dashboard-card mat-elevation-z8 w-100">
+        <mat-card appearance="outlined" class="dashboard-card w-100">
           <mat-card-header>
             <mat-card-title class="dashboard-card-title">
               Comunidades
@@ -14,10 +14,10 @@
         </mat-card>
       </mat-grid-tile>
       <mat-grid-tile [colspan]="1" [rowspan]="1">
-        <mat-card class="dashboard-card mat-elevation-z8 w-100">
+        <mat-card appearance="outlined" class="dashboard-card w-100">
           <mat-card-header>
             <mat-card-title class="dashboard-card-title">
-              Média endereços por comunidade
+              Média endereços
             </mat-card-title>
           </mat-card-header>
           <mat-card-content class="dashboard-card-content">
@@ -26,7 +26,7 @@
         </mat-card>
       </mat-grid-tile>
       <mat-grid-tile [colspan]="1" [rowspan]="1">
-        <mat-card class="dashboard-card mat-elevation-z8 w-100">
+        <mat-card appearance="outlined" class="dashboard-card w-100">
           <mat-card-header>
             <mat-card-title class="dashboard-card-title">
               Usuários com comunidade
@@ -51,7 +51,7 @@
       </mat-grid-tile>
       @if (countAddressesInCommunity$ != undefined) {
         <mat-grid-tile [colspan]="2" [rowspan]="1">
-          <mat-card class="dashboard-card mat-elevation-z8 w-100">
+          <mat-card appearance="outlined" class="dashboard-card w-100">
             <mat-card-header>
               <mat-card-title class="dashboard-card-title w-100">
                 Endereços em comunidade
@@ -61,6 +61,12 @@
               <div class="mat-title-large">{{ countAddressesInCommunity$ | async }}</div>
             </mat-card-content>
           </mat-card>
+        </mat-grid-tile>
+      } @else {
+        <mat-grid-tile [colspan]="2" [rowspan]="1">
+          <p>
+            Nenhum filtro selecionado. Escolha uma opção para exibir as informações de uma comunidade
+          </p>
         </mat-grid-tile>
       }
   </mat-grid-list>

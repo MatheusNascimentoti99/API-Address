@@ -79,10 +79,12 @@ public class CommunityController {
 
     @GetMapping("/dashboard")
     public ResponseEntity<DashboardResponse> dashBoard() {
-        long countCommunitiesWithUsers = communityService.countCommunitiesWithUsers();
-        long countCommunities = communityService.countCommunities();
-        float avgAddressByCommunity = communityService.avgAddressByCommunity();
-        DashboardResponse dashboardResponse = new DashboardResponse(countCommunitiesWithUsers, countCommunities, avgAddressByCommunity);
+
+        DashboardResponse dashboardResponse = new DashboardResponse();
+        dashboardResponse.setCountUsersWithCommunity(communityService.countCommunitiesWithUsers());
+        dashboardResponse.setAvgAddressByCommunity(communityService.avgAddressByCommunity());
+        dashboardResponse.setCountCommunities(communityService.countCommunities());
+        dashboardResponse.setCommunityCountGroup(communityService.countAddressByCommunity());
         return ResponseEntity.ok(dashboardResponse);
     }
 

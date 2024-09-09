@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ufba.br.api.dto.CommunityCountGroupResponse;
 import ufba.br.api.dto.CommunityForm;
 import ufba.br.api.exceptions.CommunityNotFoundException;
 import ufba.br.api.exceptions.UserNotAllowedException;
@@ -69,5 +70,9 @@ public class CommunityService {
             throw new CommunityNotFoundException();
         }
         return communityRepositiory.countAddressesInCommunity(communityId);
+    }
+
+    public List<CommunityCountGroupResponse> countAddressByCommunity() {
+        return communityRepositiory.countAddressByCommunity();
     }
 }

@@ -1,12 +1,17 @@
 package ufba.br.api.dto;
 
-import lombok.AllArgsConstructor;
+import java.util.List;
+
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
-@AllArgsConstructor
+@Setter
+@NoArgsConstructor
 public class DashboardResponse {
     private long countUsersWithCommunity;
     private long countCommunities;
     private float avgAddressByCommunity;
+    private List<CommunityCountGroupResponse> CommunityCountGroup;
 }
