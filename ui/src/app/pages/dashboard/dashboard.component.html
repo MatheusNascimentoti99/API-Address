@@ -1,6 +1,6 @@
 <div class="grid-container">
   <h3>Dashboard Comunidade</h3>
-  <mat-grid-list cols="2" rowHeight="100px">
+  <mat-grid-list [cols]="cols" rowHeight="100px">
       <mat-grid-tile [colspan]="1" [rowspan]="1">
         <mat-card appearance="outlined" class="dashboard-card w-100">
           <mat-card-header>
@@ -37,7 +37,25 @@
           </mat-card-content>
         </mat-card>
       </mat-grid-tile>
-      <mat-grid-tile [colspan]="2" [rowspan]="1">
+      <mat-grid-tile [colspan]="cols" [rowspan]="2">
+        <mat-card appearance="outlined" class="dashboard-card w-100">
+          <mat-card-header>
+            <mat-card-title class="dashboard-card-title">
+              Endereços por communidade
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="dashboard-card-content">
+            @if (dashboardData) {
+              <apx-chart
+                [series]="chartOptions.series"
+                [chart]="chartOptions.chart"
+                [labels]="chartOptions.labels"
+              ></apx-chart>
+            }
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="cols" [rowspan]="1">
         <div class="w-100 filter-community">
           <mat-form-field>
             <mat-label>Filtrar comunidade</mat-label>
@@ -50,7 +68,7 @@
         </div>
       </mat-grid-tile>
       @if (countAddressesInCommunity$ != undefined) {
-        <mat-grid-tile [colspan]="2" [rowspan]="1">
+        <mat-grid-tile [colspan]="cols" [rowspan]="1">
           <mat-card appearance="outlined" class="dashboard-card w-100">
             <mat-card-header>
               <mat-card-title class="dashboard-card-title w-100">
@@ -63,7 +81,7 @@
           </mat-card>
         </mat-grid-tile>
       } @else {
-        <mat-grid-tile [colspan]="2" [rowspan]="1">
+        <mat-grid-tile [colspan]="cols" [rowspan]="1">
           <p>
             Nenhum filtro selecionado. Escolha uma opção para exibir as informações de uma comunidade
           </p>

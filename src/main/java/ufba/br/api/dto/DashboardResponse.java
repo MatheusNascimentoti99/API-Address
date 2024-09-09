@@ -13,5 +13,5 @@ public class DashboardResponse {
     private long countUsersWithCommunity;
     private long countCommunities;
     private float avgAddressByCommunity;
-    private List<CommunityCountGroupResponse> CommunityCountGroup;
+    private List<CommunityCountGroupResponse> communityCountGroup;
 }

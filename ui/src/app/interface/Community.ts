@@ -16,5 +16,12 @@ export interface Community {
 export interface Dashboard {
     countUsersWithCommunity: number;
     countCommunities: number;
-    avgAddressByCommunity: number
+    avgAddressByCommunity: number;
+    communityCountGroup: CommunityCountGroup[]
+}
+
+export interface CommunityCountGroup {
+  id: number;
+  name: string;
+  countAddress: number;
 }
