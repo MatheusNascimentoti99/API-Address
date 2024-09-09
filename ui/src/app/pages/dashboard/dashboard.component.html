@@ -1,0 +1,42 @@
+<div class="grid-container">
+  <h1 class="mat-h1">Dashboard</h1>
+  <mat-grid-list cols="2" rowHeight="100px">
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <mat-card class="dashboard-card mat-elevation-z8">
+          <mat-card-header>
+            <mat-card-title class="dashboard-card-title">
+              Comunidades
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="dashboard-card-content">
+            <div class="mat-title-large">{{dashboardData?.countCommunities?.toLocaleString()}}</div>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <mat-card class="dashboard-card mat-elevation-z8">
+          <mat-card-header>
+            <mat-card-title class="dashboard-card-title">
+              Média de endereços por comunidade
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="dashboard-card-content">
+            <div class="mat-title-large">{{dashboardData?.avgAddressByCommunity?.toLocaleString()}}</div>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <mat-card class="dashboard-card mat-elevation-z8">
+          <mat-card-header>
+            <mat-card-title class="dashboard-card-title">
+              Usuários com comunidade
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="dashboard-card-content">
+            <div class="mat-title-large">{{dashboardData?.countUsersWithCommunity}}</div>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+      
+  </mat-grid-list>
+</div>

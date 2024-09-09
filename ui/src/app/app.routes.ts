@@ -4,8 +4,8 @@ import { MainComponent } from './layout/main/main.component';
 import { HomeComponent } from './pages/home/home.component';
 import { CreateComponent } from './pages/address/create/create.component';
 import { EditComponent } from './pages/address/edit/edit.component';
-import { CreateComponent as RegisterComponent } from './pages/auth/create/create.component';
-import { TopCommunitiesComponent } from './pages/top-communities/top-communities.component';
+import { CreateComponent as CreateUserComponent } from './pages/auth/create/create.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 export const routes: Routes = [
     {
         path: '',
@@ -18,7 +18,7 @@ export const routes: Routes = [
     },
     {
         path: 'register',
-        component: RegisterComponent
+        component: CreateUserComponent
     },
     {
         path: '',
@@ -37,8 +37,8 @@ export const routes: Routes = [
                 component: EditComponent
             },
             {
-                path: 'community',
-                component: TopCommunitiesComponent
+                path: 'dashboard',
+                component: DashboardComponent
             }
         ]
     }

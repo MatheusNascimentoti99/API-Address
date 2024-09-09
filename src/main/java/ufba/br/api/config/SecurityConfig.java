@@ -40,7 +40,8 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.PUT, "community/**").hasRole(UserRole.ADMIN.name())
                 .requestMatchers(HttpMethod.DELETE, "community/**").hasRole(UserRole.ADMIN.name())
                 .requestMatchers(HttpMethod.PATCH, "community/**").hasRole(UserRole.ADMIN.name())
-                .anyRequest().authenticated())
+                .anyRequest().authenticated()
+        )
         .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
         .build();
   }

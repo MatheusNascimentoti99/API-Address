@@ -1,11 +1,11 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { TopCommunitiesComponent } from './top-communities.component';
+import { DashboardComponent } from './dashboard.component';
 
-describe('TopCommunitiesComponent', () => {
-  let component: TopCommunitiesComponent;
-  let fixture: ComponentFixture<TopCommunitiesComponent>;
+describe('DashboardComponent', () => {
+  let component: DashboardComponent;
+  let fixture: ComponentFixture<DashboardComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -14,7 +14,7 @@ describe('TopCommunitiesComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TopCommunitiesComponent);
+    fixture = TestBed.createComponent(DashboardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -68,8 +68,6 @@ export class EditComponent {
     confirm.afterClosed().subscribe(result => {
       if (result) {
         this.updateAddress();
-      } else {
-        this.goHome();
       }
     });
 

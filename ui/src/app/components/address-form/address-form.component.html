@@ -14,14 +14,14 @@
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-              <mat-label>Rua*</mat-label>
+              <mat-label>Rua</mat-label>
               <input matInput required value="Google" placeholder="Ex. Av. Paulista nº 100" [(ngModel)]="address.street" name="street">
           </mat-form-field>
         </div>
         <div class="col">
           <mat-form-field class="full-width">
             <mat-label>Número</mat-label>
-            <input matInput placeholder="Ex. 100" [(ngModel)]="address.number" name="number">
+            <input matInput placeholder="Ex. 100" [(ngModel)]="address.number" name="number" type="number">
           </mat-form-field>
         </div>
         <div class="col">
@@ -35,7 +35,7 @@
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <mat-label>Estado*</mat-label>
+            <mat-label>Estado</mat-label>
             <mat-select matNativeControl required [(ngModel)]="selectedState" [(value)]="selectedState" name="state" placeholder="Ex. Bahia" (selectionChange)="changeState()">
                 @for (state of states; track state) {
                     <mat-option [value]="state">{{state.nome}}</mat-option>
@@ -45,7 +45,7 @@
         </div>
         <div class="col">
           <mat-form-field class="full-width">
-            <mat-label>Cidade*</mat-label>
+            <mat-label>Cidade</mat-label>
             <mat-select matNativeControl required [(ngModel)]="address.city" [(value)]="address.city" name="city" placeholder="Ex. São Paulo">
                 @for (city of cities; track city) {
                     <mat-option [value]="city.nome">{{city.nome}}</mat-option>
@@ -55,22 +55,25 @@
         </div>
         <div class="col">
           <mat-form-field class="full-width">
-            <mat-label>País*</mat-label>
+            <mat-label>País</mat-label>
             <input matInput required placeholder="Ex. Brasil" [(ngModel)]="address.country" name="country">
           </mat-form-field>
         </div>
       </div>
 
       <div class="row">
-        <div class="col">
-          <mat-form-field class="full-width">
+        <div class="col full-width">
+          <mat-form-field>
             <mat-label>Comunidades</mat-label>
             <mat-select matNativeControl multiple [(ngModel)]="address.communitiesIds" [(value)]="address.communitiesIds" name="state" placeholder="Ex. Corrida Feira">
                 @for (community of communities; track community) {
                     <mat-option [value]="community.id">{{community.name}}</mat-option>
                 }
-            </mat-select>
-          </mat-form-field>
+              </mat-select>
+            </mat-form-field>
+          <button mat-icon-button (click)="onClickNewCommunity()" type="button" *ngIf="authService.isAdmin()">
+            <mat-icon>add</mat-icon>
+          </button>
         </div>
       </div>
 

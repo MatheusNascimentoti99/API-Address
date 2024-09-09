@@ -31,8 +31,8 @@ export class AuthService {
     }))
   }
 
-  register(name: string, password: string) {
-    return this.httpClient.post('api/register', { name, password });
+  register(name: string, password: string, role: string | null = null) {
+    return this.httpClient.post('api/register', { name, password, role });
   }
 
   logout() {
@@ -42,6 +42,10 @@ export class AuthService {
 
   isAuthenticated() {
     return !!localStorage.getItem('token');
+  }
+
+  isAdmin() {
+    return (JSON.parse(localStorage.getItem('user') ?? '') as User)?.role == 'ADMIN';
   }
 
   getToken() {

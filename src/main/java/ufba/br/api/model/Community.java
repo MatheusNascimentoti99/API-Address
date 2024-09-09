@@ -30,8 +30,8 @@ public class Community {
     private Instant createdAt;
     @UpdateTimestamp
     private Instant updatedAt;
-    @ManyToMany(mappedBy = "communities")
     @JsonIgnore
+    @ManyToMany(mappedBy = "communities")
     private List<Address> addresses;
     @ManyToOne
     private User owner;

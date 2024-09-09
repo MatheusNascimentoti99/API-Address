@@ -8,11 +8,13 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -46,7 +48,14 @@ public class Address {
     @JoinColumn(name = "user_id")
     @JsonIgnore
     private User user;
-    @ManyToMany
+    @ManyToMany(cascade = {
+        CascadeType.DETACH,
+        CascadeType.DETACH
+    })
+    @JoinTable(name = "address_community",
+        joinColumns = @JoinColumn(name = "address_id"),
+        inverseJoinColumns = @JoinColumn(name = "community_id")
+    )
     private List<Community> communities;
 
     public List<Community> getCommunities() {
