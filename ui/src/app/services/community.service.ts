@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Community, CommunityForm } from '@app/interface/Community';
+import { Community, CommunityForm, Dashboard } from '@app/interface/Community';
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +20,9 @@ export class CommunityService {
 
   findMostPopular() {
     return this.httpClient.get<Community[]>('api/community/top');
+  }
+
+  findDashboard() {
+    return this.httpClient.get<Dashboard>('api/community/dashboard');
   }
 }

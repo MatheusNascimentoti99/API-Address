@@ -7,6 +7,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { CommunityService } from '@app/services/community.service';
+import { Dashboard } from '@app/interface/Community';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,8 +26,14 @@ import { MatCardModule } from '@angular/material/card';
 })
 export class DashboardComponent {
   private breakpointObserver = inject(BreakpointObserver);
-
-  /** Based on the screen size, switch from standard to one column per row */
+  private communityService = inject(CommunityService);
+  dashboardData: Dashboard | null = null;
+  
+  constructor() {
+    this.communityService.findDashboard().subscribe(value => {
+      this.dashboardData = value
+    })
+  }
   cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
       if (matches) {

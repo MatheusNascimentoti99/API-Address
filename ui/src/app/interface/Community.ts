@@ -12,3 +12,9 @@ export interface Community {
     updatedAt: Date;
     owner: User;
 }
+
+export interface Dashboard {
+    countUsersWithCommunity: number;
+    countCommunities: number;
+    avgAddressByCommunity: number
+}
